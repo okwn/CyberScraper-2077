@@ -29,6 +29,38 @@ By participating in this project, you agree to abide by our Code of Conduct. Ple
    playwright install
    ```
 
+### Setting Up with Docker
+
+1. Build the image:
+   ```bash
+   docker build -t cyberscraper2077 .
+   ```
+
+2. Set environment variables:
+   ```bash
+   export OPENAI_API_KEY=your-key-here
+   export GOOGLE_API_KEY=your-key-here
+   ```
+
+3. Run the container:
+   ```bash
+   docker run -e OPENAI_API_KEY -e GOOGLE_API_KEY cyberscraper2077
+   ```
+
+### Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `OPENAI_API_KEY` | Yes | Your OpenAI API key for GPT models |
+| `GOOGLE_API_KEY` | Yes | Your Google API key for Gemini models |
+| `TOR_SOCKS_PORT` | No | Tor proxy port for anonymized scraping (default: 9050) |
+
+For local development, create a `.env` file (never commit it):
+```bash
+echo "OPENAI_API_KEY=sk-..." >> .env
+echo "GOOGLE_API_KEY=..." >> .env
+```
+
 ### Making Changes
 
 1. Create a new branch:
