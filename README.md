@@ -346,6 +346,60 @@ We welcome all cyberpunks, netrunners, and code samurais to contribute to CyberS
 
 Ran into a glitch in the matrix? Let me know by adding the issue to this repo so that we can fix it together.
 
+### Common Issues
+
+**"ModuleNotFoundError" on import**
+```bash
+pip install -r requirements.txt
+```
+If using Docker, rebuild the image: `docker build .`
+
+**Playwright/browser not found**
+```bash
+playwright install
+# or for undetected mode:
+playwright install --with-deps chromium
+```
+
+**Streamlit "Access Denied" errors**
+The scraper uses Patchright (undetected Playwright). If sites block access, try:
+- Using Tor mode (`TOR_SOCKS_PORT=9050`) for rotating exit IPs
+- Reducing request rate in `src/scrapers/playwright_scraper.py`
+
+**Ollama connection refused**
+```bash
+# Verify Ollama is running
+ollama list
+# If not, start it:
+ollama serve
+```
+
+**aiohttp timeout errors**
+Increase timeout in `src/http_client.py`:
+```python
+DEFAULT_TIMEOUT = aiohttp.ClientTimeout(total=120)
+```
+
+**"OPENAI_API_KEY is missing" error**
+Create a `.env` file in the project root:
+```
+OPENAI_API_KEY=sk-your-key-here
+GOOGLE_API_KEY=your-google-key
+```
+Do not commit this file — it is in `.gitignore`.
+
+**Docker: port already in use**
+```bash
+docker ps  # find container using port 8501
+docker stop <container_id>
+```
+
+### Getting Help
+
+- [Open an issue](https://github.com/itsOwen/CyberScraper-2077/issues) with error logs
+- Check [existing issues](https://github.com/itsOwen/CyberScraper-2077/issues) before opening new ones
+- For security issues, see [SECURITY.md](SECURITY.md)
+
 ## ❓ FAQ
 
 **Q: Is CyberScraper 2077 legal to use?**
